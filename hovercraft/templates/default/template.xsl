@@ -64,12 +64,12 @@ xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="@*"/>
       </script>
     </xsl:for-each>
+    <!--<script type="text/javascript" async="true"-->
+        <!--src="http://mathjax.local/MathJax.js?config=TeX-MML-AM_CHTML">-->
+    <!--</script>-->
     <script type="text/javascript" async="true"
-        src="http://mathjax.local/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
-    <!--<script type="text/javascript" async="true"
         src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>-->
+    </script>
   </head>
   <body class="impress-not-supported">
 
