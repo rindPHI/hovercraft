@@ -6,6 +6,9 @@ Hovercraft!
 Hovercraft! is a tool to make impress.js_ presentations from
 reStructuredText. For a quick explanation, see the demo_.
 
+This fork supports MathJax formulas and adds a "GOTO" dropdown
+field to the presenter console.
+
 Features
 --------
 
@@ -18,6 +21,12 @@ Features
 * The slide show generated is in HTML, so you only need a web browser to show it.
 
 * Easy sharing, as it can be put up on a website for anyone to see!
+
+* Use MathJax in your presentation (you need to use it as in \\(`x^2 = y`\\) ).
+
+* Presenter console features a GOTO dropdown for quick changes to a particular step.
+
+
 
 Full documentation is available at readthedocs.org_, and also in the
 documentation subdirectory.
