@@ -29,6 +29,7 @@
         '</div>' +
         '<div id="controls"> ' +
           '<div id="prev"><a  href="#" onclick="impress().prev(); return false;" />Prev</a></div>' +
+          '<div id="goto">Go to step: <select id="gotoSelect"></select></div>' +
           '<div id="next"><a  href="#" onclick="impress().next(); return false;" />Next</a></div>' +
           '<div id="clock">00:00:00 AM</div>' +
           '<div id="timer" onclick="timerReset()">00m 00s</div>' +
@@ -233,6 +234,20 @@
                 consoleWindow.timerStart = new Date();
                 consoleWindow.timerReset = timerReset;
                 consoleWindow.clockInterval = setInterval('impressConsole("' + rootId + '").clockTick()', 1000 );
+
+                var gotoSelect = consoleWindow.document.getElementById('gotoSelect');
+                gotoSelect.onchange = function() {
+                    impress().goto(gotoSelect.options[gotoSelect.selectedIndex].text);
+                };
+
+                var steps = document.getElementsByClassName('step');
+                var i;
+                for (i = -1; i < steps.length; ++i) {
+                    if (i == -1)
+                        gotoSelect.innerHTML += '<option></option>';
+                    else
+                        gotoSelect.innerHTML += '<option>' + steps[i].getAttribute('id') + '</option>';
+                }
 
                 // keyboard navigation handlers
                 // 33: pg up, 37: left, 38: up

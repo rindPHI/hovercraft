@@ -7,14 +7,14 @@ xmlns="http://www.w3.org/1999/xhtml">
 <xsl:import href="resource:templates/reST.xsl" />
 
 <xsl:template match="step" name="step">
-  <div class="step">
-    <xsl:copy-of select="@*"/>
-    <xsl:apply-templates />
-  </div>
+    <div class="step">
+      <xsl:copy-of select="@*"/>
+      <xsl:apply-templates />
+    </div>
 </xsl:template>
 
 <xsl:template match="note" name="note">
-  <div class="notes"><xsl:apply-templates /></div>
+	<div class="notes"><xsl:apply-templates /></div>
 </xsl:template>
 
 <xsl:template match="/" name="main">
@@ -64,6 +64,12 @@ xmlns="http://www.w3.org/1999/xhtml">
         <xsl:copy-of select="@*"/>
       </script>
     </xsl:for-each>
+    <script type="text/javascript" async="true"
+        src="http://mathjax.local/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <!--<script type="text/javascript" async="true"
+        src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>-->
   </head>
   <body class="impress-not-supported">
 
@@ -104,7 +110,7 @@ xmlns="http://www.w3.org/1999/xhtml">
         <div class="footer">
           <xsl:apply-templates />
         </div>
-      </xsl:for-each>
+    </xsl:for-each>
 
     </xsl:for-each>
 

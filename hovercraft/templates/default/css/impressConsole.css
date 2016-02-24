@@ -1,3 +1,22 @@
+/* styling */
+select {
+    border: 1px solid #bbb;
+    box-shadow: 0 2px 1px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    /*background-image: url(../images/select-arrow.png);*/
+    background-position: right;
+    background-repeat: no-repeat;
+    -moz-appearance: none;
+    border-radius: 0;
+    font-size: 1em;
+}
+
+select:hover {
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+
+
 html#impressconsole {
     height: 100%
 }
@@ -57,6 +76,11 @@ div#controls {
 
 div#prev {
     float: left;
+}
+
+div#goto {
+    float: left;
+    margin-left: 50px;
 }
 
 div#next {
