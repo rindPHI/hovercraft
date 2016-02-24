@@ -23,7 +23,10 @@ Features
 * Easy sharing, as it can be put up on a website for anyone to see!
 
 * Use MathJax in your presentation You need to use it as in the following snippet:
-  .. code:: `\\(`x^2 = y`\\)
+
+.. code:: restructuredtext
+
+  \\(`x^2 = y`\\)
 
 * Presenter console features a GOTO dropdown for quick changes to a particular step.
 
