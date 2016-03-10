@@ -231,6 +231,8 @@
                 goto: empty,
                 prev: empty,
                 next: empty
+                addActionToStep: empty,
+                addResetActionToStep: empty
             };
         }
 
@@ -312,7 +314,10 @@
                         z: toNumber( data.rotateZ || data.rotate )
                     },
                     scale: toNumber( data.scale, 1 ),
-                    el: el
+                    el: el,
+                    actions: [],
+                    activeAction: 0,
+                    resetAction: null
                 };
 
             if ( !el.id ) {
@@ -570,10 +575,20 @@
 
         // `prev` API function goes to previous step (in document order)
         var prev = function() {
-            var prev = steps.indexOf( activeStep ) - 1;
-            prev = prev >= 0 ? steps[ prev ] : steps[ steps.length - 1 ];
+            var activeStepsData = stepsData['impress-' + activeStep.id];
+            
+            if (activeStepsData.resetAction !== null && activeStepsData.activeAction > 0){
+                activeStepsData.resetAction(activeStepsData.el);
+                activeStepsData.activeAction = 0;
+                
+                return activeStepsData.el;
+            }
+            else {
+                var prev = steps.indexOf( activeStep ) - 1;
+                prev = prev >= 0 ? steps[ prev ] : steps[ steps.length - 1 ];
 
-            return goto( prev );
+                return goto( prev );
+            }
         };
 
         // `next` API function goes to next step (in document order)
@@ -582,6 +597,19 @@
             next = next < steps.length ? steps[ next ] : steps[ 0 ];
 
             return goto( next );
+            }
+        };
+  
+        // `addActionToStep` API function adds a function to a step which is called when next is called.
+        // There can be more than one action per step.
+        var addActionToStep = function (id, action){
+            stepsData['impress-' + id].actions.push(action);
+        };
+
+        // `addResetActionToStep` API function adds a function to a step which is called when prev is called and 
+        // there already are actions executed on that step
+        var addResetActionToStep = function (id, resetAction){
+            stepsData['impress-' + id].resetAction = resetAction;
         };
 
         // Adding some useful classes to step elements.
@@ -657,7 +685,9 @@
             init: init,
             goto: goto,
             next: next,
-            prev: prev
+            prev: prev,
+            addActionToStep: addActionToStep,
+            addResetActionToStep: addResetActionToStep
         } );
 
     };
