@@ -864,3 +864,29 @@
 //
 // I've learnt a lot when building impress.js and I hope this code and comments
 // will help somebody learn at least some part of it.
+
+// (By DS)
+// The following piece of code enables an easier integration
+// of the substeps feature. You just have to annotate your
+// paragraph that you with to be a substep by
+// 
+// .. class:: substep
+//
+// And it will appear on click. By default, a reset is not implemented.
+// Note that it relies on JQuery (would also be possible without,
+// but I like it that way).
+$( "#impress" ).on("impress:init", function() {
+    var api = impress();
+    var substeps = $( ".substep" );
+
+    for (var i = 0; i < substeps.length; i++) {
+        var step = $( substeps[i] ).parents( ".step" )[0];
+        var substep = $( substeps[i] );
+        api.addActionToStep(step.id, function(substep) {
+                return function(stepElement) {
+                    substep.css("visibility", "visible");
+                };
+            }(substep)
+        );
+    }
+});
