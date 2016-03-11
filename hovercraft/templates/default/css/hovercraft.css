@@ -57,3 +57,9 @@ div#slide-number
     right: 2.5em;
     text-align: right;
 }
+
+/* Substeps feature */
+.substep
+{
+    visibility: hidden;
+}
