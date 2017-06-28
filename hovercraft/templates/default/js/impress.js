@@ -230,7 +230,7 @@
                 init: empty,
                 goto: empty,
                 prev: empty,
-                next: empty
+                next: empty,
                 addActionToStep: empty,
                 addResetActionToStep: empty
             };
@@ -576,11 +576,11 @@
         // `prev` API function goes to previous step (in document order)
         var prev = function() {
             var activeStepsData = stepsData['impress-' + activeStep.id];
-            
+
             if (activeStepsData.resetAction !== null && activeStepsData.activeAction > 0){
                 activeStepsData.resetAction(activeStepsData.el);
                 activeStepsData.activeAction = 0;
-                
+
                 return activeStepsData.el;
             }
             else {
@@ -592,21 +592,31 @@
         };
 
         // `next` API function goes to next step (in document order)
-        var next = function() {
-            var next = steps.indexOf( activeStep ) + 1;
-            next = next < steps.length ? steps[ next ] : steps[ 0 ];
-
-            return goto( next );
+        var next = function () {
+            var activeStepsData = stepsData['impress-' + activeStep.id];
+            var activeStepsDataActions = activeStepsData.actions;
+ 
+            if (activeStepsData.activeAction != activeStepsDataActions.length && activeStepsDataActions.length != 0){
+                activeStepsDataActions[activeStepsData.activeAction](activeStepsData.el);
+                activeStepsData.activeAction++;
+                
+                return activeStepsData.el;
+            }
+            else {
+                var next = steps.indexOf( activeStep ) + 1;
+                next = next < steps.length ? steps[ next ] : steps[ 0 ];
+                
+                return goto(next);
             }
         };
-  
+
         // `addActionToStep` API function adds a function to a step which is called when next is called.
         // There can be more than one action per step.
         var addActionToStep = function (id, action){
             stepsData['impress-' + id].actions.push(action);
         };
 
-        // `addResetActionToStep` API function adds a function to a step which is called when prev is called and 
+        // `addResetActionToStep` API function adds a function to a step which is called when prev is called and
         // there already are actions executed on that step
         var addResetActionToStep = function (id, resetAction){
             stepsData['impress-' + id].resetAction = resetAction;
@@ -869,7 +879,7 @@
 // The following piece of code enables an easier integration
 // of the substeps feature. You just have to annotate your
 // paragraph that you with to be a substep by
-// 
+//
 // .. class:: substep
 //
 // And it will appear on click. By default, a reset is not implemented.
